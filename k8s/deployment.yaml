@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15.0
+          ports:
+          - containerPort: 5432
+          env:
+          - name: POSTGRES_PASSWORD
+            value: "postg123"
+          - name: POSTGRES_USER
+            value: "postgres"
+          - name: POSTGRES_BD
+            value: "postgres"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+spec:
+  selector:
+    app: postgres
+  ports:
+  - port: 5432
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: web
+          image: gabgom/project-kubernetes:v1
+          ports:
+          - containerPort: 8080
+          env:
+          - name: DB_PASSWORD
+            value: "postg123"
+          - name: DB_USERNAME
+            value: "postgres"
+          - name: DB_DATABASE
+            value: "postgres"
+          - name: DB_HOST
+            value: "postgres"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+spec:
+  selector:
+    app: web
+  ports:
+  - port: 80
+    targetPort: 8080
+    nodePort: 30000
+  type: NodePort
