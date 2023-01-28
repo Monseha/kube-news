@@ -50,7 +50,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: gabgom/project-kubernetes:v1
+          image: gabgom/project-kubernetes:{{TAG}}
           ports:
           - containerPort: 8080
           env:
