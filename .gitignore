@@ -1,4 +1,4 @@
-kube_config.yaml
+./kube_config.yaml
 
 node_modules/
 
