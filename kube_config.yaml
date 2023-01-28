@@ -11,7 +11,9 @@ contexts:
     user: do-nyc1-k8s-admin
   name: do-nyc1-k8s
 current-context: do-nyc1-k8s
+preferences: {}
 users:
 - name: do-nyc1-k8s-admin
   user:
-    token: dop_v1_92fb473141b3370310dad9a58ef4138b42c68a8f9c9ccb00dd841772367e40e9
+    token: dop_v1_7fa9b73fa69415f0b1bc7f3084f6b66ec1811106416e7b9ddc5b27bf9bc7243c
+    
